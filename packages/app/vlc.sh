@@ -15,6 +15,11 @@ if [ $? -ne 0 ]; then
     packer -S --noedit --noconfirm libaacs
 fi
 
+IS_INSTALLED=$(pacman -Qqm npapi-vlc)
+if [ $? -ne 0 ]; then
+    packer -S --noedit --noconfirm npapi-vlc
+fi
+
 mkdir -p /home/${SUDO_USER}/.config/aacs/
 wget -c http://vlc-bluray.whoknowsmy.name/files/KEYDB.cfg -O /home/${SUDO_USER}/.config/aacs/
 chown -R ${SUDO_USER}:users /home/${SUDO_USER}/.config
