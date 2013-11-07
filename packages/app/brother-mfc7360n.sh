@@ -8,7 +8,7 @@ fi
 CORE_PKG=$(basename ${0} .sh)-lpr
 MORE_PKGS="$(basename ${0} .sh)-cups brscan4"
 
-IS_INSTALLED=$(pacman -Qqm ${CORE_PKG})
+IS_INSTALLED=$(pacman -Qqm ${CORE_PKG} 2>/dev/null)
 if [ $? -ne 0 ]; then
     packer -S --noedit --noconfirm ${CORE_PKG} ${MORE_PKGS}
 else

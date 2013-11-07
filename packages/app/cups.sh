@@ -25,4 +25,4 @@ else
     echo "Something went wrong."
 fi
 
-systemctl enable cups.service
+systemctl enable cups

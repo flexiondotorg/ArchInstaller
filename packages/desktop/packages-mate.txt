@@ -1,5 +1,6 @@
 accountsservice
 cups-pk-helper
+gvfs-smb
 lightdm-gtk2-greeter
 mate
 mate-extras
