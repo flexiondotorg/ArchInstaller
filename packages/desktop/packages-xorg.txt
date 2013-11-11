@@ -1,4 +1,5 @@
 xf86-input-synaptics
+xf86-video-fbdev
 xf86-video-vesa
 xorg-apps
 xorg-server
