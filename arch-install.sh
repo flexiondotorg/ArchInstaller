@@ -7,7 +7,7 @@ else
     exit 1
 fi
 
-BASE_GROUPS="adm,audio,disk,lp,optical,storage,video,games,power,scanner,uucp"
+BASE_GROUPS="adm,disk,locate,log,sys,uucp"
 DSK=""
 NFS_CACHE=""
 FQDN="arch.example.org"
