@@ -6,10 +6,10 @@ if [ `id -u` -ne 0 ]; then
 fi
 
 CUPS=""
-if [ -f ../desktop/packages-cups.txt ]; then
-    CUPS="../desktop/packages-cups.txt"
-elif [ -f packages/desktop/packages-cups.txt ]; then
-    CUPS="packages/desktop/packages-cups.txt"
+if [ -f ../desktop/cups.txt ]; then
+    CUPS="../desktop/cups.txt"
+elif [ -f packages/desktop/cups.txt ]; then
+    CUPS="packages/desktop/cups.txt"
 fi
 
 if [ -f ${CUPS} ]; then

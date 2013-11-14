@@ -1,14 +1,10 @@
 gedit-plugins
+gksu
 gnome
-gnome-packagekit
-gnome-settings-daemon-updates
 gnome-extra
 gnome-tweak-tool
 gvfs-smb
 networkmanager-openvpn
 networkmanager-pptp
-polkit-gnome
-telepathy
-terminator
 upower
 xdg-user-dirs

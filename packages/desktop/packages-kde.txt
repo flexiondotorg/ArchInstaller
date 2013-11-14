@@ -1,8 +1,0 @@
-archlinux-themes-kdm
-kde
-kdeplasma-applets-networkmanagement
-kde-telepathy
-phonon-gstreamer
-telepathy
-upower
-xdg-user-dirs

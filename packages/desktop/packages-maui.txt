@@ -1,4 +1,0 @@
-hawaii-meta-git
-communi-desktop-git
-qupzilla-qt5-git
-sddm-qt5-git

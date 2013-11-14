@@ -3,11 +3,8 @@ gksu
 leafpad
 lxde
 network-manager-applet
-networkmanager
 networkmanager-openvpn
 networkmanager-pptp
 notification-daemon
-obconf
-terminator
 upower
 xdg-user-dirs

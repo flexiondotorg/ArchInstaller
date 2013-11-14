@@ -6,10 +6,10 @@ if [ `id -u` -ne 0 ]; then
 fi
 
 TTF=""
-if [ -f ../desktop/packages-ttf.txt ]; then
-    TTF="../desktop/packages-ttf.txt"
-elif [ -f packages/desktop/packages-ttf.txt ]; then
-    TTF="packages/desktop/packages-ttf.txt"
+if [ -f ../desktop/ttf.txt ]; then
+    TTF="../desktop/ttf.txt"
+elif [ -f packages/desktop/ttf.txt ]; then
+    TTF="packages/desktop/ttf.txt"
 fi
 
 if [ -f ${TTF} ]; then

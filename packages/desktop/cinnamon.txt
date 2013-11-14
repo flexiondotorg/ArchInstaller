@@ -1,0 +1,9 @@
+accountsservice
+cinnamon
+gksu
+gvfs-smb
+lightdm-gtk3-greeter
+networkmanager-openvpn
+networkmanager-pptp
+upower
+xdg-user-dirs

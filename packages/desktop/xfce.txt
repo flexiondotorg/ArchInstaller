@@ -2,9 +2,7 @@ lightdm-gtk2-greeter
 xfce4
 xfce4-goodies
 network-manager-applet
-networkmanager
 networkmanager-openvpn
 networkmanager-pptp
-terminator
 upower
 xdg-user-dirs
