@@ -14,7 +14,6 @@ FQDN="arch.example.org"
 TIMEZONE="Europe/London"
 KEYMAP="uk"
 LANG="en_GB.UTF-8"
-LOCALE=`echo ${LANG} | cut -d'.' -f1`
 LC_COLLATE="C"
 FONT_MAP="8859-1_to_uni"
 PASSWORD=""
@@ -322,6 +321,19 @@ function build_packages() {
     # Chain packages
     cat packages/base/extra.txt > /tmp/packages.txt
     if [ "${DE}" != "none" ] && [ "${INSTALL_TYPE}" == "desktop" ]; then
+    
+        # Determine locale for Firefox
+        if [ "${LOCALE}" == "pt_BR" ] || [ "${LOCALE}" == "pt_PT" ] ||
+           [ "${LOCALE}" == "en_GB" ] || [ "${LOCALE}" == "en_US" ] ||
+           [ "${LOCALE}" == "es_AR" ] || [ "${LOCALE}" == "es_CL" ] ||
+           [ "${LOCALE}" == "es_ES" ] || [ "${LOCALE}" == "zh_CN" ]; then
+            LOCALE_FF=`echo ${LOCALE} | tr '[:upper:]' '[:lower:]' | sed 's/_/-/'`
+        else
+            LOCALE_FF=`echo ${LOCALE} | cut -d\_ -f1`
+        fi
+        echo "firefox-i18n-${LOCALE_FF}" >> packages/desktop/firefox.txt
+    
+        # Determine locale for KDE
         if [ "${DE}" == "kde" ]; then
             if [ "${LOCALE}" == "pt_BR" ] || [ "${LOCALE}" == "en_GB" ] || [ "${LOCALE}" == "zh_CN" ]; then
                 LOCALE_KDE=`echo ${LOCALE} | tr '[:upper:]' '[:lower:]'`
@@ -330,7 +342,7 @@ function build_packages() {
             else
                 LOCALE_KDE=`echo ${LOCALE} | cut -d\_ -f1`
             fi
-            echo "kde-l10n-${LOCALE_KDE}" >> packages/desktop/kde.txt
+            echo "kde-l10n-${LOCALE_KDE}" >> packages/desktop/kde.txt            
         elif [ "${DE}" == "mate" ]; then
             MATE_CHECK=`grep "\[mate\]" /etc/pacman.conf`
             if [ $? -ne 0 ]; then
@@ -343,6 +355,9 @@ function build_packages() {
 
         # Chain the DE packages.
         cat packages/desktop/xorg.txt packages/desktop/${DE}.txt packages/desktop/gst.txt packages/desktop/cups.txt packages/desktop/ttf.txt >> /tmp/packages.txt
+        if [ "${DE}" != "gnome" ]; then
+            cat packages/desktop/firefox.txt >> /tmp/packages.txt
+        fi
     fi
 }
 
@@ -714,6 +729,7 @@ if [ $? -ne 0 ]; then
     echo " - See https://wiki.archlinux.org/index.php/Locale"
     exit 1
 fi
+LOCALE=`echo ${LANG} | cut -d'.' -f1`
 
 KEYMAP_TEST=`ls -1 /usr/share/kbd/keymaps/*/*/*${KEYMAP}*`
 if [ $? -ne 0 ]; then
