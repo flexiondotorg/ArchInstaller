@@ -9,8 +9,3 @@ CORE_PKG=$(basename ${0} .sh)
 MORE_PKGS=""
 
 pacman -S --needed --noconfirm ${CORE_PKG} ${MORE_PKGS}
-
-IS_INSTALLED=$(pacman -Qqm dockmanager)
-if [ $? -ne 0 ]; then
-    packer -S --noedit --noconfirm dockmanager
-fi
