@@ -23,6 +23,11 @@ fi
 git clone https://github.com/chriskempson/base16-builder.git
 cd base16-builder
 mkdir -p templates/terminator/
+
+# 0A = Yellow
+# 09 = Light Brown
+# 0F = Dark Brown
+
 cat << 'TERMINATOR' > templates/terminator/dark.config.erb
 [global_config]
   title_transmit_bg_color = "#<%= @base["08"]["hex"] %>"
@@ -36,7 +41,7 @@ cat << 'TERMINATOR' > templates/terminator/dark.config.erb
     background_image = None
     copy_on_selection = True
     allow_bold = False
-    palette = "#<%= @base["00"]["hex"] %>:#<%= @base["08"]["hex"] %>:#<%= @base["0B"]["hex"] %>:#<%= @base["0A"]["hex"] %>:#<%= @base["0D"]["hex"] %>:#<%= @base["0E"]["hex"] %>:#<%= @base["0C"]["hex"] %>:#<%= @base["05"]["hex"] %>:#<%= @base["03"]["hex"] %>:#<%= @base["09"]["hex"] %>:#<%= @base["01"]["hex"] %>:#<%= @base["02"]["hex"] %>:#<%= @base["04"]["hex"] %>:#<%= @base["06"]["hex"] %>:#<%= @base["0F"]["hex"] %>:#<%= @base["07"]["hex"] %>"
+    palette = "#<%= @base["00"]["hex"] %>:#<%= @base["08"]["hex"] %>:#<%= @base["0B"]["hex"] %>:#<%= @base["0A"]["hex"] %>:#<%= @base["0D"]["hex"] %>:#<%= @base["0E"]["hex"] %>:#<%= @base["0C"]["hex"] %>:#<%= @base["05"]["hex"] %>:#<%= @base["03"]["hex"] %>:#<%= @base["08"]["hex"] %>:#<%= @base["0B"]["hex"] %>:#<%= @base["0A"]["hex"] %>:#<%= @base["0D"]["hex"] %>:#<%= @base["0E"]["hex"] %>:#<%= @base["0C"]["hex"] %>:#<%= @base["07"]["hex"] %>"
     foreground_color = "#<%= @base["05"]["hex"] %>"
     background_color = "#<%= @base["00"]["hex"] %>"
     cursor_color = "#<%= @base["05"]["hex"] %>"
@@ -47,7 +52,7 @@ cat << 'TERMINATOR' > templates/terminator/dark.config.erb
     background_image = None
     copy_on_selection = True
     allow_bold = False
-    palette = "#<%= @base["00"]["hex"] %>:#<%= @base["08"]["hex"] %>:#<%= @base["0B"]["hex"] %>:#<%= @base["0A"]["hex"] %>:#<%= @base["0D"]["hex"] %>:#<%= @base["0E"]["hex"] %>:#<%= @base["0C"]["hex"] %>:#<%= @base["05"]["hex"] %>:#<%= @base["03"]["hex"] %>:#<%= @base["09"]["hex"] %>:#<%= @base["01"]["hex"] %>:#<%= @base["02"]["hex"] %>:#<%= @base["04"]["hex"] %>:#<%= @base["06"]["hex"] %>:#<%= @base["0F"]["hex"] %>:#<%= @base["07"]["hex"] %>"
+    palette = "#<%= @base["00"]["hex"] %>:#<%= @base["08"]["hex"] %>:#<%= @base["0B"]["hex"] %>:#<%= @base["0A"]["hex"] %>:#<%= @base["0D"]["hex"] %>:#<%= @base["0E"]["hex"] %>:#<%= @base["0C"]["hex"] %>:#<%= @base["05"]["hex"] %>:#<%= @base["03"]["hex"] %>:#<%= @base["08"]["hex"] %>:#<%= @base["0B"]["hex"] %>:#<%= @base["0A"]["hex"] %>:#<%= @base["0D"]["hex"] %>:#<%= @base["0E"]["hex"] %>:#<%= @base["0C"]["hex"] %>:#<%= @base["07"]["hex"] %>"
     foreground_color = "#<%= @base["05"]["hex"] %>"
     background_color = "#<%= @base["00"]["hex"] %>"
     cursor_color = "#<%= @base["05"]["hex"] %>"
