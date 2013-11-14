@@ -22,8 +22,8 @@ fi
 
 git clone https://github.com/chriskempson/base16-builder.git
 cd base16-builder
-mkdir -p /templates/terminator/
-cat << 'TERMINATOR' > /templates/terminator/dark.config.erb
+mkdir -p templates/terminator/
+cat << 'TERMINATOR' > templates/terminator/dark.config.erb
 [global_config]
   title_transmit_bg_color = "#<%= @base["08"]["hex"] %>"
   title_inactive_bg_color = "#<%= @base["03"]["hex"] %>"
