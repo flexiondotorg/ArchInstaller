@@ -1,3 +1,4 @@
 kde
+kdeplasma-applets-plasma-nm
 upower
 xdg-user-dirs

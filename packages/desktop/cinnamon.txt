@@ -1,6 +1,7 @@
 accountsservice
 cinnamon
 gksu
+gnome-terminal
 gvfs-smb
 lightdm-gtk3-greeter
 networkmanager-openvpn
