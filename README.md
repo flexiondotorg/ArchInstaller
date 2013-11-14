@@ -18,7 +18,7 @@ should be run from the [Arch Linux install ISO](https://www.archlinux.org/downlo
     * ntfs
     * reiserfs
     * xfs
-  * Works on PCs (x86 and x86_64) and Raspberry Pi (no filesystem options on the Pi).
+  * Works on PCs (x86 and x86_64) and ARM (armv6h and armv7h).
   * On x86_64 desktops the `multi-lib` repository is automatically enabled and `multilib-devel` automatically installed.
   * Automated installation of your preferred desktop environment, or none at all.
     * Cinnamon
@@ -147,7 +147,6 @@ settings in `arch-install.sh`.
 
   * Add automated root partition resizing magic to `arch-install.sh` for Raspberry Pi.
     * <http://michael.otacoo.com/manuals/raspberry-pi/>
-  * Detect locale for dictionaries in desktop environment installs.
   * Fix Thinkpad T43p hotkeys keys.
     * Run one of the following on system start up.
     * `echo enable,0x00ffffff > /proc/acpi/ibm/hotkey`
@@ -165,7 +164,7 @@ settings in `arch-install.sh`.
   * UEFI support - waiting for more complete UEFI support in SYSLINUX.
   * Maybe allow locating `/home` on a different disk.
   * Maybe add LVM and LUKS capability to disk partitioning.
-  * Maybe add ZFS support.P.
+  * Maybe add ZFS support.
 
 ### Power Management TODO
 
