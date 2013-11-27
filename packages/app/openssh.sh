@@ -6,12 +6,9 @@ if [ `id -u` -ne 0 ]; then
 fi
 
 CORE_PKG=$(basename ${0} .sh)
-MORE_PKGS="fail2ban syslog-ng"
+MORE_PKGS=""
 
 pacman -S --needed --noconfirm ${CORE_PKG} ${MORE_PKGS}
 
-systemctl enable syslog-ng
-systemctl start syslog-ng
-
-sudo systemctl enable fail2ban.service
-sudo systemctl start fail2ban.service
+systemctl enable sshd
+systemctl start sshd
