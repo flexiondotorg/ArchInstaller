@@ -378,7 +378,11 @@ function install_packages() {
         fi
     else
         pacman -Rs --noconfirm heirloom-mailx
-        pacman -S --noconfirm --needed $(cat packages/base/base.txt)
+        if [ "${INSTALL_TYPE}" == "server" ]; then
+            pacman -S --noconfirm --needed $(cat packages/base/base.txt | grep -Ev "linux")
+        else
+            pacman -S --noconfirm --needed $(cat packages/base/base.txt)
+        fi
         if [ "${BASE_ARCH}" == "x86" ]; then
 			pacman -S --noconfirm --needed $(cat /tmp/packages.txt)
         else
