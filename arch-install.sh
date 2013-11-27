@@ -379,14 +379,14 @@ function install_packages() {
     else
         pacman -Rs --noconfirm heirloom-mailx
         if [ "${INSTALL_TYPE}" == "server" ]; then
-            pacman -S --noconfirm --needed $(cat packages/base/base.txt) --ignore linux
+            pacman -S --needed $(cat packages/base/base.txt) --ignore linux
         else
             pacman -S --noconfirm --needed $(cat packages/base/base.txt)
         fi
         if [ "${BASE_ARCH}" == "x86" ]; then
-			pacman -S --noconfirm --needed $(cat /tmp/packages.txt)
+            pacman -S --noconfirm --needed $(cat /tmp/packages.txt)
         else
-			pacman -S --noconfirm --needed $(cat /tmp/packages.txt | grep -Ev "ipw2|syslinux")
+            pacman -S --noconfirm --needed $(cat /tmp/packages.txt | grep -Ev "ipw2|syslinux")
         fi
     fi
 }
@@ -401,10 +401,10 @@ function enable_multilib() {
         sed -i '/#\[multilib\]/,/#Include = \/etc\/pacman.d\/mirrorlist/ s/#//' /etc/pacman.conf
         sed -i '/#\[multilib\]/,/#Include = \/etc\/pacman.d\/mirrorlist/ s/#//' ${TARGET_PREFIX}/etc/pacman.conf
         if [ "${MODE}" == "install" ]; then
-			echo -en "\nY\nY\nY\nY\nY\n" | pacstrap -c -i ${TARGET_PREFIX} multilib-devel
-		else
-			pacman -Syy --needed --noconfirm multilib-devel
-		fi
+            echo -en "\nY\nY\nY\nY\nY\n" | pacstrap -c -i ${TARGET_PREFIX} multilib-devel
+        else
+            pacman -Syy --needed --noconfirm multilib-devel
+        fi
     fi
 }
 
