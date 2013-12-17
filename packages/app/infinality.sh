@@ -8,16 +8,28 @@ fi
 # Reference
 #  - https://wiki.archlinux.org/index.php/Infinality-bundle%2Bfonts
 
-echo '[infinality-bundle]' >> /etc/pacman.conf
-echo 'Server = http://ibn.net63.net/infinality-bundle/$arch' >> /etc/pacman.conf
+REPO_PRESENT=$(egrep "^\[infinality-bundle\]$" /etc/pacman.conf)
+if [ $? -ne 0 ]; then
+    echo '[infinality-bundle]' >> /etc/pacman.conf
+    echo 'Server = http://ibn.net63.net/infinality-bundle/$arch' >> /etc/pacman.conf
+fi
 
-echo '[infinality-bundle-multilib]' >> /etc/pacman.conf
-echo 'Server = http://ibn.net63.net/infinality-bundle-multilib/$arch' >> /etc/pacman.conf
+REPO_PRESENT=$(egrep "^\[infinality-bundle-multilib\]$" /etc/pacman.conf)
+if [ $? -ne 0 ]; then
+    echo '[infinality-bundle-multilib]' >> /etc/pacman.conf
+    echo 'Server = http://ibn.net63.net/infinality-bundle-multilib/$arch' >> /etc/pacman.conf
+fi
 
-echo '[infinality-bundle-fonts]' >> /etc/pacman.conf
-echo 'Server = http://ibn.net63.net/infinality-bundle-fonts' >> /etc/pacman.conf
+REPO_PRESENT=$(egrep "^\[infinality-bundle-fonts\]$" /etc/pacman.conf)
+if [ $? -ne 0 ]; then
+    echo '[infinality-bundle-fonts]' >> /etc/pacman.conf
+    echo 'Server = http://ibn.net63.net/infinality-bundle-fonts' >> /etc/pacman.conf
+fi
 
 pacman-key -r 962DDE58
 pacman-key --lsign-key 962DDE58
 pacman -Syyu --noconfirm
-pacman -S infinality-bundle infinality-bundle-multilib ibfonts-meta-base
+echo -en "\n\nY\nY\nY\nY\nY\nY\nY\nY\nY\nY\n" | pacman -S --needed infinality-bundle infinality-bundle-multilib ibfonts-meta-base ibfonts-meta-extended
+
+echo "Configure your fonts to use the following DPI."
+xdpyinfo | grep "dots per inch"
