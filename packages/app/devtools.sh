@@ -12,3 +12,8 @@ pacman -S --needed --noconfirm ${CORE_PKG} ${MORE_PKGS}
 
 mkdir -p /home/${SUDO_USER}/staging/{community,community-testing,multilib}
 chown -Rv ${SUDO_USER}: /home/${SUDO_USER}/staging
+
+if [ "${SUDO_USER}" == "martin" ] || [ "${SUDO_USER}" == "wimpr1m" ]; then
+    sed -i 's/#PACKAGER="John Doe <john@doe\.com>"/PACKAGER="Martin Wimpress <code@flexion\.org>"/' /usr/share/devtools/makepkg-i686.conf
+    sed -i 's/#PACKAGER="John Doe <john@doe\.com>"/PACKAGER="Martin Wimpress <code@flexion\.org>"/' /usr/share/devtools/makepkg-x86_64.conf
+fi
