@@ -29,7 +29,7 @@ fi
 pacman-key -r 962DDE58
 pacman-key --lsign-key 962DDE58
 pacman -Syyu --noconfirm
-echo -en "\n\nY\nY\nY\nY\nY\nY\nY\nY\nY\nY\n" | pacman -S --needed infinality-bundle infinality-bundle-multilib ibfonts-meta-base ibfonts-meta-extended
+echo -en "\n\nY\nY\nY\nY\nY\nY\nY\nY\nY\nY\nY\n" | pacman -S --needed infinality-bundle infinality-bundle-multilib ibfonts-meta-base ibfonts-meta-extended
 
 echo "Configure your fonts to use the following DPI."
 xdpyinfo | grep "dots per inch"

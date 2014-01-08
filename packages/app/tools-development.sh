@@ -9,7 +9,7 @@ CORE_PKG="devtools"
 
 if [ `uname -m` == "x86_64" ]; then
     MORE_PKGS="multilib-devel"
-else    
+else
     MORE_PKGS="base-devel"
 fi
 
