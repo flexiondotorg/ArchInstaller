@@ -8,9 +8,9 @@ fi
 CORE_PKG=$(basename ${0} .sh)
 MORE_PKGS=""
 
-pacman -S --needed --noconfirm ${CORE_PKG} ${MORE_PKGS}
-
-IS_INSTALLED=$(pacman -Qqm skype4pidgin)
+IS_INSTALLED=$(pacman -Qqm ${CORE_PKG})
 if [ $? -ne 0 ]; then
-    packer -S --noedit --noconfirm skype4pidgin       
+    packer -S --noedit --noconfirm ${CORE_PKG} ${MORE_PKGS}
+else
+    echo "${CORE_PKG} is already installed."
 fi

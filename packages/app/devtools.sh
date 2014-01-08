@@ -16,4 +16,7 @@ chown -Rv ${SUDO_USER}: /home/${SUDO_USER}/staging
 if [ "${SUDO_USER}" == "martin" ] || [ "${SUDO_USER}" == "wimpr1m" ]; then
     sed -i 's/#PACKAGER="John Doe <john@doe\.com>"/PACKAGER="Martin Wimpress <code@flexion\.org>"/' /usr/share/devtools/makepkg-i686.conf
     sed -i 's/#PACKAGER="John Doe <john@doe\.com>"/PACKAGER="Martin Wimpress <code@flexion\.org>"/' /usr/share/devtools/makepkg-x86_64.conf
+    echo 'PACKAGER="Martin Wimpress <code@flexion.org>"' > /home/"${SUDO_USER}"/.makepkg.conf
+    echo 'GPGKEY="0864983E"' >> /home/"${SUDO_USER}"/.makepkg.conf
+    chown "${SUDO_USER}": /home/"${SUDO_USER}"/.makepkg.conf
 fi
