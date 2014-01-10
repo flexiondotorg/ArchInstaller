@@ -21,3 +21,7 @@ if [ -n "${SUDO_USER}" ]; then
     systemctl enable btsync@${SUDO_USER}
     systemctl enable btsync-autoconfig@${SUDO_USER}
 fi
+
+if [ -f /usr/bin/ufw ]; then
+    ufw allow 8888/tcp
+fi
