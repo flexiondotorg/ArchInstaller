@@ -6,7 +6,7 @@ if [ `id -u` -ne 0 ]; then
 fi
 
 CORE_PKG=$(basename ${0} .sh)
-MORE_PKGS="gtk-theme-shiki-colors-flat"
+MORE_PKGS=""
 
 IS_INSTALLED=$(pacman -Qqm ${CORE_PKG})
 if [ $? -ne 0 ]; then
