@@ -6,6 +6,6 @@ if [ `id -u` -ne 0 ]; then
 fi
 
 CORE_PKG=$(basename ${0} .sh)
-MORE_PKGS="xcursor-bluecurve xcursor-flatbed xcursor-neutral xcursor-pinux xcursor-premium xcursor-simpleandsoft xcursor-vanilla-dmz xcursor-vanilla-dmz-aa"
+MORE_PKGS="xcursor-flatbed xcursor-neutral xcursor-pinux xcursor-premium xcursor-simpleandsoft xcursor-vanilla-dmz xcursor-vanilla-dmz-aa"
 
 pacman -S --needed --noconfirm ${CORE_PKG} ${MORE_PKGS}
