@@ -321,7 +321,7 @@ function build_packages() {
     # Chain packages
     cat packages/base/extra.txt > /tmp/packages.txt
     if [ "${DE}" != "none" ] && [ "${INSTALL_TYPE}" == "desktop" ]; then
-    
+
         # Determine locale for Firefox
         if [ "${LOCALE}" == "pt_BR" ] || [ "${LOCALE}" == "pt_PT" ] ||
            [ "${LOCALE}" == "en_GB" ] || [ "${LOCALE}" == "en_US" ] ||
@@ -332,7 +332,7 @@ function build_packages() {
             LOCALE_FF=`echo ${LOCALE} | cut -d\_ -f1`
         fi
         echo "firefox-i18n-${LOCALE_FF}" >> packages/desktop/firefox.txt
-    
+
         # Determine locale for KDE
         if [ "${DE}" == "kde" ]; then
             if [ "${LOCALE}" == "pt_BR" ] || [ "${LOCALE}" == "en_GB" ] || [ "${LOCALE}" == "zh_CN" ]; then
@@ -342,15 +342,7 @@ function build_packages() {
             else
                 LOCALE_KDE=`echo ${LOCALE} | cut -d\_ -f1`
             fi
-            echo "kde-l10n-${LOCALE_KDE}" >> packages/desktop/kde.txt            
-        elif [ "${DE}" == "mate" ]; then
-            MATE_CHECK=`grep "\[mate\]" /etc/pacman.conf`
-            if [ $? -ne 0 ]; then
-                echo -e '\n[mate]\nSigLevel = Optional TrustAll\nServer = http://repo.mate-desktop.org/archlinux/$arch' >> /etc/pacman.conf
-                if [ "${MODE}" == "update" ]; then
-					pacman -Syy
-				fi
-            fi
+            echo "kde-l10n-${LOCALE_KDE}" >> packages/desktop/kde.txt
         fi
 
         # Chain the DE packages.
@@ -481,13 +473,12 @@ function build_configuration() {
             add_config "systemctl enable cups.service"
             add_config "systemctl enable bluetooth.service"
         elif [ "${DE}" == "mate" ]; then
-            echo -e '\n[mate]\nSigLevel = Optional TrustAll\nServer = http://repo.mate-desktop.org/archlinux/$arch' >> ${TARGET_PREFIX}/etc/pacman.conf
             add_config "systemctl enable lightdm.service"
             add_config "systemctl enable upower.service"
             add_config "systemctl enable accounts-daemon.service"
             add_config "systemctl enable NetworkManager.service"
             add_config "systemctl enable cups.service"
-            add_config "systemctl enable bluetooth.service"
+            #add_config "systemctl enable bluetooth.service"
         elif [ "${DE}" == "xfce" ]; then
             add_config "systemctl enable lightdm.service"
             add_config "systemctl enable upower.service"
