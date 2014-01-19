@@ -4,7 +4,7 @@ gksu
 gvfs-smb
 lightdm-gtk2-greeter
 mate
-mate-extras
+mate-extra
 network-manager-applet
 networkmanager-openvpn
 networkmanager-pptp
