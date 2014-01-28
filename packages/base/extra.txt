@@ -1,3 +1,4 @@
+acpi_call
 alsa-firmware
 avahi
 b43-fwcutter
@@ -28,6 +29,7 @@ sudo
 syslinux
 syslog-ng
 terminus-font
+tlp
 tzdata
 unzip
 wget
