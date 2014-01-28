@@ -202,3 +202,5 @@ fi
 if [ -f ${HOME}/.base16/base16-builder/output/shell/base16-default.dark.sh ]; then
     source ${HOME}/.base16/base16-builder/output/shell/base16-default.dark.sh
 fi
+
+if [ -f /usr/bin/screenfetch ]; then screenfetch; fi
