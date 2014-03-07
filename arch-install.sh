@@ -70,7 +70,7 @@ function usage() {
         echo "  -f : The filesystem to use. 'bfs', 'btrfs', 'ext{2,3,4}', 'f2fs, 'jfs', 'nilfs2', 'ntfs', 'reiserfs' and 'xfs' are supported. Defaults to '${FS}'."
     fi
     echo "  -c : The NFS export to mount and use as the pacman cache."
-    echo "  -e : The desktop environment to install. Defaults to '${DE}'. Can be 'none', 'cinnamon', 'gnome', 'kde', 'lxde', 'mate' or 'xfce'"
+    echo "  -e : The desktop environment to install. Defaults to '${DE}'. Can be 'none', 'cinnamon', 'enlightenment', 'gnome', 'kde', 'lxde', 'mate' or 'xfce'"
     echo "  -k : The keyboard mapping to use. Defaults to '${KEYMAP}'. See '/usr/share/kbd/keymaps/' for options."
     echo "  -l : The language to use. Defaults to '${LANG}'. See '/etc/locale.gen' for options."
     echo "  -n : The hostname to use. Defaults to '${FQDN}'"
@@ -453,6 +453,13 @@ function build_configuration() {
             add_config "systemctl enable NetworkManager.service"
             add_config "systemctl enable cups.service"
             add_config "systemctl enable bluetooth.service"
+        elif [ "${DE}" == "enlightenment" ]; then
+            add_config "systemctl enable lightdm.service"
+            add_config "systemctl enable upower.service"
+            add_config "systemctl enable accounts-daemon.service"
+            add_config "systemctl enable NetworkManager.service"
+            add_config "systemctl enable cups.service"
+            add_config "systemctl enable bluetooth.service"
         elif [ "${DE}" == "gnome" ]; then
             add_config "systemctl enable gdm.service"
             add_config "systemctl enable upower.service"
@@ -713,7 +720,7 @@ if [ "${INSTALL_TYPE}" != "desktop" ] && [ "${INSTALL_TYPE}" != "server" ]; then
     exit 1
 fi
 
-if [ "${DE}" != "none" ] && [ "${DE}" != "cinnamon" ] && [ "${DE}" != "gnome" ] && [ "${DE}" != "kde" ] && [ "${DE}" != "lxde" ] && [ "${DE}" != "mate" ] && [ "${DE}" != "xfce" ]; then
+if [ "${DE}" != "none" ] && [ "${DE}" != "cinnamon" ] && [ "${DE}" != "enlightenment" ] && [ "${DE}" != "gnome" ] && [ "${DE}" != "kde" ] && [ "${DE}" != "lxde" ] && [ "${DE}" != "mate" ] && [ "${DE}" != "xfce" ]; then
     echo "ERROR! '${DE}' is not a supported desktop environment."
     exit 1
 fi

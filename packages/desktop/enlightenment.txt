@@ -1,0 +1,8 @@
+accountsservice
+lightdm-gtk2-greeter
+enlightenment
+terminology
+network-manager-applet
+networkmanager-openvpn
+networkmanager-pptp
+xdg-user-dirs
