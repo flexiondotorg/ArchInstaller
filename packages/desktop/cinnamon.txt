@@ -7,16 +7,3 @@ networkmanager-openvpn
 networkmanager-pptp
 upower
 xdg-user-dirs
-empathy
-evince
-file-roller
-gedit-plugins
-gnome-bluetooth
-gnome-calculator
-gnome-disk-utility
-gnome-keyring
-gnome-screenshot
-gnome-system-monitor
-gnome-terminal
-shotwell
-
