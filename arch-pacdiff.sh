@@ -12,9 +12,9 @@ if [ -z "${DISPLAY}" ] && [ `pidof X` -ne 0 ] ; then
     exit 1
 fi
 
-TEST_DIFFUSE=`which diffuse`
+TEST_DIFFUSE=`which meld`
 if [ $? -ne 0 ]; then
-    pacman -Syy --needed --noconfirm diffuse
+    pacman -Syy --needed --noconfirm meld
 fi
 
 echo "Looking for .pac{new,orig,save} files"
@@ -31,11 +31,9 @@ do
     original=`echo ${config} | sed -e 's/\.pacnew//' -e 's/\.pacsave//' -e 's/\.pacorig//'`
     if [ -f ${config} ] && [ -f ${original} ]; then
         echo " - ${original} requires merging with ${config}"
-        
         # Diff original and new configuration to merge
-        diffuse ${original} ${config} 2>/dev/null &
+        meld ${original} ${config} 2>/dev/null &
         wait
-        
         # Remove .pac{new,save,orig} file?
         echo
         read -p "Are you ready to delete '${config}'? [Y/N] " -n 1 -r
