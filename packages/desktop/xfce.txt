@@ -1,3 +1,5 @@
+accountsservice
+gvfs-smb
 lightdm-gtk2-greeter
 xfce4
 xfce4-goodies

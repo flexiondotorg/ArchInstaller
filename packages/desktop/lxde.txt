@@ -1,5 +1,6 @@
+accountsservice
 epdfview
-gksu
+gvfs-smb
 leafpad
 lxde
 network-manager-applet

@@ -446,52 +446,28 @@ function build_configuration() {
     add_config "sed -i 's/#Color/Color/' /etc/pacman.conf"
 
     if [ "${INSTALL_TYPE}" == "desktop" ]; then
+        # Enable the common desktop services
+        add_config "systemctl enable accounts-daemon.service"
+        add_config "systemctl enable cups.service"
+        add_config "systemctl enable bluetooth.service"
+        add_config "systemctl enable NetworkManager.service"
+        add_config "systemctl enable upower.service"
+        
+        # Desktop specific services
         if [ "${DE}" == "cinnamon" ]; then
             add_config "systemctl enable lightdm.service"
-            add_config "systemctl enable upower.service"
-            add_config "systemctl enable accounts-daemon.service"
-            add_config "systemctl enable NetworkManager.service"
-            add_config "systemctl enable cups.service"
-            add_config "systemctl enable bluetooth.service"
         elif [ "${DE}" == "enlightenment" ]; then
             add_config "systemctl enable lightdm.service"
-            add_config "systemctl enable upower.service"
-            add_config "systemctl enable accounts-daemon.service"
-            add_config "systemctl enable NetworkManager.service"
-            add_config "systemctl enable cups.service"
-            add_config "systemctl enable bluetooth.service"
         elif [ "${DE}" == "gnome" ]; then
             add_config "systemctl enable gdm.service"
-            add_config "systemctl enable upower.service"
-            add_config "systemctl enable accounts-daemon.service"
-            add_config "systemctl enable NetworkManager.service"
-            add_config "systemctl enable cups.service"
-            add_config "systemctl enable bluetooth.service"
         elif [ "${DE}" == "kde" ]; then
             add_config "systemctl enable kdm.service"
-            add_config "systemctl enable upower.service"
-            add_config "systemctl enable NetworkManager.service"
-            add_config "systemctl enable cups.service"
-            add_config "systemctl enable bluetooth.service"
         elif [ "${DE}" == "lxde" ]; then
             add_config "systemctl enable lxdm.service"
-            add_config "systemctl enable upower.service"
-            add_config "systemctl enable NetworkManager.service"
-            add_config "systemctl enable cups.service"
-            add_config "systemctl enable bluetooth.service"
         elif [ "${DE}" == "mate" ]; then
             add_config "systemctl enable lightdm.service"
-            add_config "systemctl enable upower.service"
-            add_config "systemctl enable accounts-daemon.service"
-            add_config "systemctl enable NetworkManager.service"
-            add_config "systemctl enable cups.service"
-            #add_config "systemctl enable bluetooth.service"
         elif [ "${DE}" == "xfce" ]; then
             add_config "systemctl enable lightdm.service"
-            add_config "systemctl enable upower.service"
-            add_config "systemctl enable NetworkManager.service"
-            add_config "systemctl enable cups.service"
-            add_config "systemctl enable bluetooth.service"
         fi
     fi
 

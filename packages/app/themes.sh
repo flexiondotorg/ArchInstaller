@@ -41,7 +41,7 @@ done
 chown -R "${SUDO_USER}": /home/"${SUDO_USER}"/.icons
 
 
-for EXTRA_PKG in gtk-theme-shiki-colors gtk-theme-shiki-colors-flat gtk-theme-numix-blue ubuntu-themes
+for EXTRA_PKG in gtk-theme-shiki-colors-flat gtk-theme-numix-blue ubuntu-themes
 do
     IS_INSTALLED=$(pacman -Qqm ${EXTRA_PKG})
     if [ $? -ne 0 ]; then

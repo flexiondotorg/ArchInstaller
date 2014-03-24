@@ -15,7 +15,7 @@ else
     echo "${CORE_PKG} is already installed."
 fi
 
-for EXTRA_PKG in numix-shine-icon-theme-git numix-circle-icon-theme-git gtk-theme-numix-blue
+for EXTRA_PKG in numix-circle-icon-theme-git gtk-theme-numix-blue
 do
     IS_INSTALLED=$(pacman -Qqm ${EXTRA_PKG})
     if [ $? -ne 0 ]; then

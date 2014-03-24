@@ -7,3 +7,14 @@ networkmanager-openvpn
 networkmanager-pptp
 upower
 xdg-user-dirs
+baobab
+eog
+file-roller
+evince
+gedit
+gnome-calculator
+gnome-disk-utility
+gnome-screenshot
+gnome-system-log
+gnome-system-monitor
+gnome-terminal

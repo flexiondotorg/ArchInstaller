@@ -1,5 +1,4 @@
 gedit-plugins
-gksu
 gnome
 gnome-extra
 gnome-tweak-tool
