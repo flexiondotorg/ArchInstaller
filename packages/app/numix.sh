@@ -5,22 +5,10 @@ if [ `id -u` -ne 0 ]; then
     exit 1
 fi
 
-CORE_PKG=$(basename ${0} .sh)-themes-git
-MORE_PKGS="numix-icon-theme-git"
+CORE_PKG=$(basename ${0} .sh)-themes
+pacman -S --noconfirm --needed ${CORE_PKG}
 
-IS_INSTALLED=$(pacman -Qqm ${CORE_PKG})
-if [ $? -ne 0 ]; then
-    packer -S --noedit --noconfirm ${CORE_PKG} ${MORE_PKGS}
-else
-    echo "${CORE_PKG} is already installed."
-fi
-
-for EXTRA_PKG in numix-circle-icon-theme-git gtk-theme-numix-blue
+for EXTRA_PKG in numix-themes-archblue numix-icon-theme-git numix-circle-icon-theme-git numix-shine-icon-theme-git
 do
-    IS_INSTALLED=$(pacman -Qqm ${EXTRA_PKG})
-    if [ $? -ne 0 ]; then
-        packer -S --noedit --noconfirm ${EXTRA_PKG}
-    else
-        echo "${EXTRA_PKG} is already installed."
-    fi
+    packer -S --noedit --noconfirm ${EXTRA_PKG}
 done

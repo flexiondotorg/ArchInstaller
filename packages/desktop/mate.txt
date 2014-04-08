@@ -1,6 +1,6 @@
 accountsservice
 gvfs-smb
-lightdm-gtk2-greeter
+lightdm-gtk3-greeter
 mate
 mate-extra
 network-manager-applet
