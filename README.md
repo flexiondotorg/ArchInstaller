@@ -22,6 +22,7 @@ should be run from the [Arch Linux install ISO](https://www.archlinux.org/downlo
   * On x86_64 desktops the `multi-lib` repository is automatically enabled and `multilib-devel` automatically installed.
   * Automated installation of your preferred desktop environment, or none at all.
     * Cinnamon
+    * Enlightenment
     * GNOME
     * KDE
     * LXDE

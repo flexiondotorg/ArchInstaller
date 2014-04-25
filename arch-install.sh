@@ -230,7 +230,7 @@ function summary() {
 		echo " - Provision users     : DISABLED!"
 	fi
 
-	if [ -f netctl ]; then
+	if [ -f *.network ]; then
 		echo " - Configure network   : Yes"
 	else
 		echo " - Configure network   : No"
@@ -471,9 +471,11 @@ function build_configuration() {
         fi
     fi
 
-    if [ -f netctl ]; then
-        cp netctl ${TARGET_PREFIX}/etc/netctl/mynetwork
-        add_config "netctl enable mynetwork"
+    if [ -f *.network ]; then
+        cp *.network ${TARGET_PREFIX}/etc/systemd/network
+        rm ${TARGET_PREFIX}/etc/resolv.conf
+        ln -s ${TARGET_PREFIX}/run/systemd/network/resolv.conf ${TARGET_PREFIX}/etc/resolv.conf
+        add_config "systemctl enable systemd-networkd"
     fi
 
     add_config "sed -i 's/hosts: files dns/hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4/' /etc/nsswitch.conf"
