@@ -11,19 +11,19 @@ fi
 REPO_PRESENT=$(egrep "^\[infinality-bundle\]$" /etc/pacman.conf)
 if [ $? -ne 0 ]; then
     echo '[infinality-bundle]' >> /etc/pacman.conf
-    echo 'Server = http://ibn.net63.net/infinality-bundle/$arch' >> /etc/pacman.conf
+    echo 'Server = http://bohoomil.com/repo/$arch' >> /etc/pacman.conf
 fi
 
 REPO_PRESENT=$(egrep "^\[infinality-bundle-multilib\]$" /etc/pacman.conf)
 if [ $? -ne 0 ]; then
     echo '[infinality-bundle-multilib]' >> /etc/pacman.conf
-    echo 'Server = http://ibn.net63.net/infinality-bundle-multilib/$arch' >> /etc/pacman.conf
+    echo 'Server = http://bohoomil.com/repo/multilib/' >> /etc/pacman.conf
 fi
 
 REPO_PRESENT=$(egrep "^\[infinality-bundle-fonts\]$" /etc/pacman.conf)
 if [ $? -ne 0 ]; then
     echo '[infinality-bundle-fonts]' >> /etc/pacman.conf
-    echo 'Server = http://ibn.net63.net/infinality-bundle-fonts' >> /etc/pacman.conf
+    echo 'Server = http://bohoomil.com/repo/fonts' >> /etc/pacman.conf
 fi
 
 pacman-key -r 962DDE58
