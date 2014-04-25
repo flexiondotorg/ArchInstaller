@@ -31,7 +31,7 @@ if [ "${HOSTNAME}" == "archiso" ]; then
     MODE="install"
     BASE_ARCH="x86"
 else
-    MODE="update"    
+    MODE="update"
     if [ "${CPU}" == "armv6l" ] || [ "${CPU}" == "armv7l" ]; then
         DSK="mmcblk0"
         TARGET_PREFIX=""
@@ -58,7 +58,7 @@ function usage() {
         echo "  -p : The partition layout to use. One of: "
         echo "         'brh' : /boot, /root and /home"
         echo "         'br'   : /boot and /root."
-		echo "  -w : The root password."        
+		echo "  -w : The root password."
     fi
 
     echo
@@ -151,9 +151,9 @@ function query_disk_subsystem() {
 						HAS_TRIM=0;;
 			"xfs")    MKFS="mkfs.xfs -f -q";;
 			*) echo "ERROR! Filesystem ${FS} is not supported."
-			   echo " - See `basename ${0}` -h"
-			   exit 1
-			   ;;
+               echo " - See `basename ${0}` -h"
+               exit 1
+               ;;
 		esac
 
 		if [ "${PARTITION_TYPE}" != "msdos" ] && [ "${PARTITION_TYPE}" != "gpt" ]; then
@@ -284,7 +284,7 @@ function format_disks() {
         echo "==> Creating /home partition"
         parted -a optimal -s /dev/${DSK} unit MiB mkpart primary $root_end $max >/dev/null
     fi
-    
+
     echo "==> Setting /dev/${DSK} bootable"
     parted -a optimal -s /dev/${DSK} toggle 1 boot >/dev/null
     if [ "${PARTITION_TYPE}" == "gpt" ]; then
@@ -452,7 +452,7 @@ function build_configuration() {
         add_config "systemctl enable bluetooth.service"
         add_config "systemctl enable NetworkManager.service"
         add_config "systemctl enable upower.service"
-        
+
         # Desktop specific services
         if [ "${DE}" == "cinnamon" ]; then
             add_config "systemctl enable lightdm.service"
