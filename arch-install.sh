@@ -70,7 +70,7 @@ function usage() {
         echo "  -f : The filesystem to use. 'bfs', 'btrfs', 'ext{2,3,4}', 'f2fs, 'jfs', 'nilfs2', 'ntfs', 'reiserfs' and 'xfs' are supported. Defaults to '${FS}'."
     fi
     echo "  -c : The NFS export to mount and use as the pacman cache."
-    echo "  -e : The desktop environment to install. Defaults to '${DE}'. Can be 'none', 'cinnamon', 'enlightenment', 'gnome', 'kde', 'lxde', 'mate' or 'xfce'"
+    echo "  -e : The desktop environment to install. Defaults to '${DE}'. Can be 'none', 'cinnamon', 'enlightenment', 'gnome', 'kde', 'lxde', 'lxqt', 'mate', 'unity' or 'xfce'"
     echo "  -k : The keyboard mapping to use. Defaults to '${KEYMAP}'. See '/usr/share/kbd/keymaps/' for options."
     echo "  -l : The language to use. Defaults to '${LANG}'. See '/etc/locale.gen' for options."
     echo "  -n : The hostname to use. Defaults to '${FQDN}'"
@@ -343,6 +343,24 @@ function build_packages() {
                 LOCALE_KDE=`echo ${LOCALE} | cut -d\_ -f1`
             fi
             echo "kde-l10n-${LOCALE_KDE}" >> packages/desktop/kde.txt
+        elif [ "${DE}" == "lxqt" ]; then
+            MATE_CHECK=`grep "\[lxqt-git\]" /etc/pacman.conf`
+            if [ $? -ne 0 ]; then
+                echo -e '\n[lxqt-git]\nSigLevel = Optional TrustAll\nServer = http://pkgbuild.com/~flexiondotorg/lxqt-git/0.7.0/$arch' >> /etc/pacman.conf
+                if [ "${MODE}" == "update" ]; then
+                    pacman -Syy
+                fi
+            fi
+        elif [ "${DE}" == "unity" ]; then
+            UNITY_CHECK=`grep "\[Unity-for-Arch\]" /etc/pacman.conf`
+            if [ $? -ne 0 ]; then
+                # - https://github.com/chenxiaolong/Unity-for-Arch
+                #echo -e '\n[Unity-for-Arch]\nSigLevel = Optional TrustAll\nServer = http://dl.dropbox.com/u/486665/Repos/$repo/$arch' >> /etc/pacman.conf
+                #echo -e '\n[Unity-for-Arch-Extra]\nSigLevel = Optional TrustAll\nServer = http://dl.dropbox.com/u/486665/Repos/$repo/$arch' >> /etc/pacman.conf
+                if [ "${MODE}" == "update" ]; then
+                    pacman -Syy
+                fi
+            fi
         fi
 
         # Chain the DE packages.
@@ -464,7 +482,11 @@ function build_configuration() {
             add_config "systemctl enable kdm.service"
         elif [ "${DE}" == "lxde" ]; then
             add_config "systemctl enable lxdm.service"
+        elif [ "${DE}" == "lxqt" ]; then
+            add_config "systemctl enable sddm.service"
         elif [ "${DE}" == "mate" ]; then
+            add_config "systemctl enable lightdm.service"
+        elif [ "${DE}" == "unity" ]; then
             add_config "systemctl enable lightdm.service"
         elif [ "${DE}" == "xfce" ]; then
             add_config "systemctl enable lightdm.service"
@@ -497,26 +519,34 @@ function build_configuration() {
     fi
 
     if [ "${BASE_ARCH}" == "x86" ]; then
-        add_config "wget http://aur.archlinux.org/packages/pa/packer/packer.tar.gz -O /usr/local/src/packer.tar.gz"
+        # cower
+        add_config "wget http://aur.archlinux.org/packages/co/cower/cower.tar.gz -O /usr/local/src/cower.tar.gz"
         add_config 'if [ $? -ne 0 ]; then'
-        add_config "    echo \"ERROR! Couldn't downloading packer.tar.gz. Skipping packer install.\""
+        add_config "    echo \"ERROR! Couldn't downloading cower.tar.gz. Skipping cower install.\""
         add_config "else"
         add_config "    cd /usr/local/src"
-        add_config "    tar zxvf packer.tar.gz"
-        add_config "    cd packer"
+        add_config "    tar zxvf cower.tar.gz"
+        add_config "    cd cower"
         add_config "    makepkg --asroot -s --noconfirm"
-        add_config '    pacman -U --noconfirm `ls -1t /usr/local/src/packer/*.pkg.tar.xz | head -1`'
-        add_config "    mkdir -p /etc/systemd/system/graphical.target.wants/"
+        add_config '    pacman -U --noconfirm `ls -1t /usr/local/src/cower/*.pkg.tar.xz | head -1`'
         add_config "fi"
+        # pacaur
+        add_config "wget http://aur.archlinux.org/packages/pa/pacaur/pacaur.tar.gz -O /usr/local/src/pacaur.tar.gz"
+        add_config 'if [ $? -ne 0 ]; then'
+        add_config "    echo \"ERROR! Couldn't downloading pacaur.tar.gz. Skipping pacaur install.\""
+        add_config "else"
+        add_config "    cd /usr/local/src"
+        add_config "    tar zxvf pacaur.tar.gz"
+        add_config "    cd pacaur"
+        add_config "    makepkg --asroot -s --noconfirm"
+        add_config '    pacman -U --noconfirm `ls -1t /usr/local/src/pacaur/*.pkg.tar.xz | head -1`'
+        add_config "fi"
+        add_config "mkdir -p /etc/systemd/system/graphical.target.wants/"
         # Some SATA chipsets can corrupt data when ALPM is enabled. Disable it
         add_config "sed -i 's/SATA_LINKPWR/#SATA_LINKPWR/' /etc/default/tlp"
     else
-        add_config "pacman -S --needed --noconfirm packer"
+        add_config "pacman -S --needed --noconfirm cower"
     fi
-
-    # Install dot files.
-    rsync -aq skel/ ${TARGET_PREFIX}/etc/skel/
-    rsync -aq skel/ ${TARGET_PREFIX}/root/
 
     if [ -f users.csv ]; then
         OIFS=${IFS}
@@ -698,7 +728,7 @@ if [ "${INSTALL_TYPE}" != "desktop" ] && [ "${INSTALL_TYPE}" != "server" ]; then
     exit 1
 fi
 
-if [ "${DE}" != "none" ] && [ "${DE}" != "cinnamon" ] && [ "${DE}" != "enlightenment" ] && [ "${DE}" != "gnome" ] && [ "${DE}" != "kde" ] && [ "${DE}" != "lxde" ] && [ "${DE}" != "mate" ] && [ "${DE}" != "xfce" ]; then
+if [ "${DE}" != "none" ] && [ "${DE}" != "cinnamon" ] && [ "${DE}" != "enlightenment" ] && [ "${DE}" != "gnome" ] && [ "${DE}" != "kde" ] && [ "${DE}" != "lxde" ] && [ "${DE}" != "lxqt" ] && [ "${DE}" != "mate" ] && [ "${DE}" != "unity" ] && [ "${DE}" != "xfce" ]; then
     echo "ERROR! '${DE}' is not a supported desktop environment."
     exit 1
 fi

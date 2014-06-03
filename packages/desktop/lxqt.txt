@@ -1,0 +1,16 @@
+accountsservice
+juffed-git
+lximage-qt-git
+lxqt-desktop-git
+pcmanfm-qt-git
+network-manager-applet
+networkmanager-openvpn
+networkmanager-pptp
+obconf-qt-git
+openbox
+oxygen-icons
+qterminal-git
+screengrab-git
+sddm-git
+upower
+xdg-user-dirs
