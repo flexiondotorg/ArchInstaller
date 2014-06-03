@@ -1,8 +1,5 @@
 accountsservice
 gvfs-smb
-lightdm-unity-greeter
-unity
-unity-extra
 network-manager-applet
 networkmanager-openvpn
 networkmanager-pptp
