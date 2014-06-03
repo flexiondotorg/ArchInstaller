@@ -1,0 +1,2 @@
+pacman -S $(pacman -Slq Unity-for-Arch)
+pacman -S $(pacman -Slq Unity-for-Arch-Extra)

@@ -355,8 +355,8 @@ function build_packages() {
             UNITY_CHECK=`grep "\[Unity-for-Arch\]" /etc/pacman.conf`
             if [ $? -ne 0 ]; then
                 # - https://github.com/chenxiaolong/Unity-for-Arch
-                echo -e '\n#[Unity-for-Arch]\n#SigLevel = Optional TrustAll\n#Server = http://dl.dropbox.com/u/486665/Repos/$repo/$arch' >> /etc/pacman.conf
-                echo -e '\n#[Unity-for-Arch-Extra]\n#SigLevel = Optional TrustAll\n#Server = http://dl.dropbox.com/u/486665/Repos/$repo/$arch' >> /etc/pacman.conf
+                echo -e '\n[Unity-for-Arch]\nSigLevel = Optional TrustAll\nServer = http://dl.dropbox.com/u/486665/Repos/$repo/$arch' >> /etc/pacman.conf
+                echo -e '\n[Unity-for-Arch-Extra]\nSigLevel = Optional TrustAll\nServer = http://dl.dropbox.com/u/486665/Repos/$repo/$arch' >> /etc/pacman.conf
                 if [ "${MODE}" == "update" ]; then
                     pacman -Syy
                 fi
@@ -365,7 +365,7 @@ function build_packages() {
 
         # Chain the DE packages.
         cat packages/desktop/xorg.txt packages/desktop/${DE}.txt packages/desktop/gst.txt packages/desktop/cups.txt packages/desktop/ttf.txt >> /tmp/packages.txt
-        if [ "${DE}" != "gnome" ] || [ "${DE}" != "kde"] || [ "${DE}" != "lxqt"; then
+        if [ "${DE}" != "gnome" ] || [ "${DE}" != "kde" ] || [ "${DE}" != "lxqt" ]; then
             cat packages/desktop/firefox.txt >> /tmp/packages.txt
         fi
     fi
