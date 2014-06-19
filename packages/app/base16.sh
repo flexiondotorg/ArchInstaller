@@ -11,7 +11,7 @@ CORE_PKG="ruby"
 MORE_PKGS="git unzip"
 
 echo "About to install : ${CORE_PKG} ${MORE_PKGS}"
-sudo pacman -S --needed --noconfirm ${CORE_PKG} ${MORE_PKGS}
+pacaur -S --needed --noconfirm --noedit ${CORE_PKG} ${MORE_PKGS}
 
 if [ ! -d ${HOME}/.base16 ]; then
     mkdir ${HOME}/.base16

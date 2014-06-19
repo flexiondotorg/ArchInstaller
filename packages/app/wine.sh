@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-if [ `id -u` -ne 0 ]; then
-    echo "ERROR! `basename ${0}` must be executed as root."
-    exit 1
-fi
-
 CORE_PKG=$(basename ${0} .sh)
 MORE_PKGS="wine-mono wine_gecko winetricks samba"
 
@@ -18,9 +13,4 @@ else
     alsa-plugins alsa-lib libjpeg-turbo libxcomposite libxinerama ncurses libcl"
 fi
 
-pacman -S --needed --noconfirm ${CORE_PKG} ${MORE_PKGS}
-
-IS_INSTALLED=$(pacman -Qqm ttf-ms-fonts)
-if [ $? -ne 0 ]; then
-    packer -S --noedit --noconfirm ttf-ms-fonts
-fi
+pacaur -S --needed --noconfirm --noedit ${CORE_PKG} ${MORE_PKGS}

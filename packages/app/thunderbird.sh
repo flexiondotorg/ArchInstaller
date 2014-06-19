@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-if [ `id -u` -ne 0 ]; then
-    echo "ERROR! `basename ${0}` must be executed as root."
-    exit 1
-fi
-
 # Determine locale for Firefox
 LOCALE=$(echo ${LANG} | cut -d'.' -f1)
 if [ "${LOCALE}" == "pt_BR" ] || [ "${LOCALE}" == "pt_PT" ] ||
@@ -17,11 +12,6 @@ else
 fi
 
 CORE_PKG=$(basename ${0} .sh)
-MORE_PKGS="${CORE_PKG}-i18n-${LOCALE_TB}"
+MORE_PKGS="${CORE_PKG}-i18n-${LOCALE_TB} thunderbird-enigmail-bin"
 
-pacman -S --needed --noconfirm ${CORE_PKG} ${MORE_PKGS}
-
-IS_INSTALLED=$(pacman -Qqm thunderbird-enigmail-bin)
-if [ $? -ne 0 ]; then
-    packer -S --noedit --noconfirm thunderbird-enigmail-bin
-fi
+pacaur -S --needed --noconfirm --noedit ${CORE_PKG} ${MORE_PKGS}

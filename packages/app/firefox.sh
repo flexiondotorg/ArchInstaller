@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-if [ `id -u` -ne 0 ]; then
-    echo "ERROR! `basename ${0}` must be executed as root."
-    exit 1
-fi
-
 # Determine locale for Firefox
 LOCALE=$(echo ${LANG} | cut -d'.' -f1)
 if [ "${LOCALE}" == "pt_BR" ] || [ "${LOCALE}" == "pt_PT" ] ||
@@ -19,11 +14,8 @@ fi
 CORE_PKG=$(basename ${0} .sh)
 MORE_PKGS="${CORE_PKG}-i18n-${LOCALE_FF} flashplugin"
 
-pacman -S --needed --noconfirm ${CORE_PKG} ${MORE_PKGS}
+pacaur -S --needed --noconfirm --noedit ${CORE_PKG} ${MORE_PKGS}
 
 if [ `uname -m` == "x86_64" ]; then
-    IS_INSTALLED=$(pacman -Qqm lib32-flashplugin)
-    if [ $? -ne 0 ]; then
-        packer -S --noedit --noconfirm lib32-flashplugin
-    fi
+        pacaur -S --needed --noconfirm --noedit  lib32-flashplugin
 fi

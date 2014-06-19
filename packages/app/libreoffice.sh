@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-if [ `id -u` -ne 0 ]; then
-    echo "ERROR! `basename ${0}` must be executed as root."
-    exit 1
-fi
-
 LOCALE=$(echo ${LANG} | cut -d'.' -f1)
 if [ "${LOCALE}" == "pt_BR" ] || [ "${LOCALE}" == "en_GB" ] ||
    [ "${LOCALE}" == "en_US" ] || [ "${LOCALE}" == "zh_CN" ]]; then
@@ -24,4 +19,4 @@ ttf-dejavu unoconv hunspell-en hyphen-en mythes-en"
 # If you want the drawing tool uncomment this.
 #MORE_PKGS="${MORE_PKS} libreoffice-draw"
 
-pacman -S --needed --noconfirm ${CORE_PKG} ${MORE_PKGS}
+pacaur -S --needed --noconfirm --noedit ${CORE_PKG} ${MORE_PKGS}

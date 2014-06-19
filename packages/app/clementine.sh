@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
-if [ `id -u` -ne 0 ]; then
-    echo "ERROR! `basename ${0}` must be executed as root."
-    exit 1
-fi
-
 CORE_PKG=$(basename ${0} .sh)
 MORE_PKGS="gstreamer0.10-base-plugins gstreamer0.10-good-plugins gstreamer0.10-bad-plugins gstreamer0.10-ugly-plugins gvfs-mtp"
 
-pacman -S --needed --noconfirm ${CORE_PKG} ${MORE_PKGS}
+pacaur -S --needed --noconfirm --noedit ${CORE_PKG} ${MORE_PKGS}
