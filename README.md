@@ -49,7 +49,7 @@ ArchInstaller.
     wifi-menu
     dhcpcd
     pacman -Syy --noconfirm git
-    git clone https://github.com/flexiondotorg/ArchInstaller.git
+    git clone https://flexiondotorg@bitbucket.org/flexiondotorg/archinstaller.git
     cd ArchInstaller
 
 Edit the `users.csv` file to suite your requirements, see `users.example` for
@@ -102,11 +102,11 @@ Add the following to `/etc/exports`.
 
 To start the NFS server, use:
 
-    systemctl start rpc-idmapd.service rpc-mountd.service
+    systemctl start nfs-config rpcbind rpc-statd nfs-server
 
 To start NFS automatically on every boot, use:
 
-    systemctl enable rpc-idmapd.service rpc-mountd.service
+    systemctl enable nfs-config rpcbind rpc-statd nfs-server
 
 When you execute `arch-install.sh` pass in the `-c` argument, for example:
 
