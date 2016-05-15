@@ -43,7 +43,9 @@ else
     fi
 fi
 
-function usage() {
+# Fixed obsolete syntax: 's/^function //g'
+# http://wiki.bash-hackers.org/scripting/obsolete
+usage() {
     echo
     echo "Usage"
     if [ "${MODE}" == "install" ]; then
@@ -91,7 +93,7 @@ function usage() {
     exit 1
 }
 
-function query_disk_subsystem() {
+query_disk_subsystem() {
 	if [ "${MODE}" == "install" ]; then
 		if [ ! -b /dev/${DSK} ]; then
 			echo "ERROR! Target install disk not found."
@@ -170,7 +172,7 @@ function query_disk_subsystem() {
 	fi
 }
 
-function test_nfs_cache() {
+test_nfs_cache() {
 	if [ -n "${NFS_CACHE}" ]; then
 		echo
 		echo "Testing NFS cache : ${NFS_CACHE}"
@@ -193,7 +195,7 @@ function test_nfs_cache() {
 	fi
 }
 
-function summary() {
+summary() {
 	echo
 	echo "Installation Summary"
 	echo
@@ -237,7 +239,7 @@ function summary() {
 	fi
 }
 
-function final_warning() {
+final_warning() {
 	loadkeys -q ${KEYMAP}
 
 	echo
@@ -251,7 +253,7 @@ function final_warning() {
 	read
 }
 
-function format_disks() {
+format_disks() {
     echo "==> Clearing partition table on /dev/${DSK}"
     sgdisk --zap /dev/${DSK} >/dev/null 2>&1
     echo "==> Destroying magic strings and signatures on /dev/${DSK}"
@@ -307,7 +309,7 @@ function format_disks() {
     fi
 }
 
-function mount_disks() {
+mount_disks() {
     echo "==> Mounting filesystems"
     mount -t ${FS} ${MOUNT_OPTS} /dev/${ROOT_PARTITION} ${TARGET_PREFIX} >/dev/null
     mkdir -p ${TARGET_PREFIX}/{boot,home}
@@ -317,7 +319,7 @@ function mount_disks() {
     fi
 }
 
-function build_packages() {
+build_packages() {
     # Chain packages
     cat packages/base/extra.txt > /tmp/packages.txt
     if [ "${DE}" != "none" ] && [ "${INSTALL_TYPE}" == "desktop" ]; then
@@ -371,7 +373,7 @@ function build_packages() {
     fi
 }
 
-function install_packages() {
+install_packages() {
     # Install packages
     if [ "${MODE}" == "install" ]; then
         pacstrap -c ${TARGET_PREFIX} $(cat packages/base/base.txt /tmp/packages.txt)
@@ -401,11 +403,11 @@ function install_packages() {
     fi
 }
 
-function make_fstab() {
+make_fstab() {
     genfstab -t UUID -p ${TARGET_PREFIX} >> ${TARGET_PREFIX}/etc/fstab
 }
 
-function enable_multilib() {
+enable_multilib() {
     # Only install multilib on workstations, I have no need for it on my Arch "servers".
     if [ "${INSTALL_TYPE}" == "desktop" ] && [ "${CPU}" == "x86_64" ]; then
         sed -i '/#\[multilib\]/,/#Include = \/etc\/pacman.d\/mirrorlist/ s/#//' /etc/pacman.conf
@@ -418,7 +420,7 @@ function enable_multilib() {
     fi
 }
 
-function build_configuration() {
+build_configuration() {
     # Start building the configuration script
     start_config
 
@@ -650,7 +652,7 @@ function build_configuration() {
     fi
 }
 
-function apply_configuration() {
+apply_configuration() {
     if [ "${MODE}" == "install" ]; then
         add_config "syslinux-install_update -iam"
         arch-chroot ${TARGET_PREFIX} /usr/local/bin/arch-config.sh
@@ -660,7 +662,7 @@ function apply_configuration() {
     fi
 }
 
-function cleanup() {
+cleanup() {
     sync
     if [ -n "${NFS_CACHE}" ]; then
         addlinetofile "${NFS_CACHE} /var/cache/pacman/pkg nfs defaults,rw,soft,intr,relatime,noauto,x-systemd.automount,x-systemd.device-timeout=5s 0 0" ${TARGET_PREFIX}/etc/fstab
