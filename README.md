@@ -1,3 +1,7 @@
+# Obsolete
+
+**This project is inactive and archived here for reference.**
+
 # Introduction
 
 ArchInstaller is a `bash` script to automate the installation and initial
